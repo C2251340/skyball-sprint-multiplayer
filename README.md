@@ -2,17 +2,19 @@
 
 Separate multiplayer copy; the original single-player project is unchanged.
 
-## Instant play
+## Automatic waiting room
 
-Open the public URL and play immediately. There are no room codes, invitation links, or start screens. You initially race against three computers while background matchmaking connects you with other visitors. Up to four humans share each race; new arrivals take over computer runners at their current position. Full or finished races route new visitors to another match. Computers fill remaining positions and replace disconnected guests.
+Open the public URL to join a waiting room automatically. No room code or invitation link is needed. The first visitor is the host. With at least one other human connected (2 humans total), the host can click Start race. The game does not run while waiting. Empty slots are filled by computers when the host starts; 2, 3 or 4 humans are supported.
 
-Drag anywhere on mobile or use WASD / arrow keys. Everyone can build any lane. A full ball builds four steps. Release movement to stop; move backward to descend manually. Any player can request a new race after the result screen.
+Full or already-started rooms route new visitors to another waiting room. Computers replace guests who leave during a race. Only the host can start or replay a race, with at least two humans still connected.
+
+Drag anywhere on mobile or use WASD / arrow keys. Everyone can build any lane. A full ball builds four steps. Release movement to stop; move backward to descend manually.
 
 ## Networking
 
 PeerJS 1.5.5 and public PeerServer signaling provide WebRTC connections. Public deterministic peer IDs elect the host of each match; clients scan the next ID when a match is full. The host computes movement, resources, stairs and results, broadcasting snapshots at 20 Hz. Guests send bounded directional inputs which expire after 500 ms. Computers use the same movement and consumption rules.
 
-This is a small-party prototype without a dedicated game or matchmaking server. The host must stay in the foreground. If the host leaves, remaining clients start a fresh computer race and attempt automatic matching again; progress is not migrated. When signaling or direct connectivity fails, computer play remains available and the top-left reconnect button retries. Restrictive NAT/carrier networks may prevent peer connections because a TURN relay is not configured. Audio retains the existing single-player samples.
+This is a small-party prototype without a dedicated game or matchmaking server. The host must stay in the foreground. If the host leaves, remaining clients return to a fresh waiting room and attempt automatic matching again; progress is not migrated. When signaling or direct connectivity fails, the waiting screen offers a Reconnect button. Restrictive NAT/carrier networks may prevent peer connections because a TURN relay is not configured. Audio retains the existing single-player samples.
 
 ## Build
 

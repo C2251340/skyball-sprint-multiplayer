@@ -1,26 +1,26 @@
 # Skyball Sprint — Multiplayer / 联机版本
 
-Separate multiplayer copy of Skyball Sprint. The single-player project is unchanged.
+Separate multiplayer copy; the original single-player project is unchanged.
 
-## Play
+## Instant play
 
-Create a room, share its invitation link, and wait for at least 2 human players. Empty slots are automatically filled by computers when the host starts (2 people + 2 computers, 3 people + 1 computer, or 4 people). Computers gather balls, build their own lanes and return for more material using the same movement and consumption rules. The host starts the race. Drag anywhere on mobile or use WASD / arrow keys on desktop. Each person controls a different colored runner; the camera follows your runner. Every player can build any lane. A full ball builds four steps. Stop dragging to stop building; move backward to descend manually. The host can start another race from the result screen.
+Open the public URL and play immediately. There are no room codes, invitation links, or start screens. You initially race against three computers while background matchmaking connects you with other visitors. Up to four humans share each race; new arrivals take over computer runners at their current position. Full or finished races route new visitors to another match. Computers fill remaining positions and replace disconnected guests.
 
-No account, microphone, or camera permission is required. Invite links grant access to a room; share them only with intended players.
+Drag anywhere on mobile or use WASD / arrow keys. Everyone can build any lane. A full ball builds four steps. Release movement to stop; move backward to descend manually. Any player can request a new race after the result screen.
 
-## Connection limitations
+## Networking
 
-PeerJS 1.5.5 uses its public signaling service and WebRTC data connections. Keep the host's tab open and in the foreground. There is no dedicated game server, host migration, or reconnect during a race. A departing host ends the room. New players can only join before the race. Some mobile carrier, corporate, or restrictive NAT networks may require a TURN relay, which is not configured in this version; try another network if a connection times out. This is a small-party multiplayer prototype, not a public matchmaking service.
+PeerJS 1.5.5 and public PeerServer signaling provide WebRTC connections. Public deterministic peer IDs elect the host of each match; clients scan the next ID when a match is full. The host computes movement, resources, stairs and results, broadcasting snapshots at 20 Hz. Guests send bounded directional inputs which expire after 500 ms. Computers use the same movement and consumption rules.
 
-The host computes movement, resource use, shared stairs, and finish order. Clients send bounded direction inputs only. State snapshots are sent at 20 Hz. Inputs expire after 500 ms without refresh. Audio retains the single-player samples; reference audio matching remains unfinished.
+This is a small-party prototype without a dedicated game or matchmaking server. The host must stay in the foreground. If the host leaves, remaining clients start a fresh computer race and attempt automatic matching again; progress is not migrated. When signaling or direct connectivity fails, computer play remains available and the top-left reconnect button retries. Restrictive NAT/carrier networks may prevent peer connections because a TURN relay is not configured. Audio retains the existing single-player samples.
 
 ## Build
 
-Run `python3 build.py`. This embeds vendored Three.js, PeerJS, game code and sounds into `index.html`. Serve with HTTP(S); use HTTPS on a public host. GitHub Pages serves the repository root.
+Run `python3 build.py` to bundle the vendored Three.js, PeerJS, game code and sounds into `index.html`. Serve over HTTP(S); GitHub Pages serves the repository root.
 
-- `game.js`: inherited Three.js scene, models, audio, and input handlers
-- `network.js`: room UI, authoritative simulation, network transport
-- `shell.html`: responsive page template
+- `game.js`: Three.js scene, audio and controls
+- `network.js`: automatic matching, authoritative simulation and computer steering
+- `shell.html`: page template
 - `vendor/`: dependencies and licenses
 
-PeerJS documentation: https://peerjs.com/docs/
+PeerJS docs: https://peerjs.com/docs/

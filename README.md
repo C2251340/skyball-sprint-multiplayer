@@ -4,7 +4,7 @@ Separate multiplayer copy of Skyball Sprint. The single-player project is unchan
 
 ## Play
 
-Create a room, share its invitation link, and wait for 2–4 players. The host starts the race. Drag anywhere on mobile or use WASD / arrow keys on desktop. Each person controls a different colored runner; the camera follows your runner. Every player can build any lane. A full ball builds four steps. Stop dragging to stop building; move backward to descend manually. The host can start another race from the result screen.
+Create a room, share its invitation link, and wait for at least 2 human players. Empty slots are automatically filled by computers when the host starts (2 people + 2 computers, 3 people + 1 computer, or 4 people). Computers gather balls, build their own lanes and return for more material using the same movement and consumption rules. The host starts the race. Drag anywhere on mobile or use WASD / arrow keys on desktop. Each person controls a different colored runner; the camera follows your runner. Every player can build any lane. A full ball builds four steps. Stop dragging to stop building; move backward to descend manually. The host can start another race from the result screen.
 
 No account, microphone, or camera permission is required. Invite links grant access to a room; share them only with intended players.
 
